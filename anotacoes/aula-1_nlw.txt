@@ -1,0 +1,660 @@
+### NLW Spacetime - Ignite
+
+# Aula 01 - iniciar projeto
+
+Desenvolvimento completo de aplicação Web com as ferramentas mais atuais de desenvolvimento
+
+  Projeto Cápsula do tempo
+    - recordações de memórias
+    - timeline com fotos / vídeos
+
+  Desenvolvimento
+    - front-end
+    - back-end
+    - mobile
+
+  Tecnologia Stack JS
+    - React JS / Native
+    - Next.js
+    - Node.js
+    - TypeScript
+    - TailwindCSS
+    - Expo
+    - Fastify
+    - Vercel
+
+## O projeto
+
+- Cápsula do tempo
+  - login do usuário
+  - adicionar eventos importantes
+    - data
+    - mídia
+    - descrição
+    - opção de visualização pública ou não
+
+- Figma layout
+  - web
+  - mobile
+
+- React
+  - nova forma de usar
+  - Next.js é o framework recomendado pela documentação oficial
+    - oferece maior produtividade
+
+- Expo
+  - facilita desenvolvimento mobile
+  
+  
+## Setup do projeto
+
+
+### Setup das aplicações
+
+  - Back-end
+    - Node.js (guia de instalação)
+    - TypeScript (TS) + TSX
+    - Fastify (framework)
+    - ESLint (extensão VSCode)
+    - Prisma + SQLite
+
+  - Front-end
+    - React + Next.js
+    - Conceitos
+      - Componentes
+      - Propriedades
+      - Roteamento
+    - TailwindCSS
+    - ESLint + Prettier Tailwind
+
+  - Mobile
+    - Expo (guia de instalação)
+    - NativeWind
+    - ESLint + Prettier Tailwind
+
+
+### Criação da estrutura do projeto
+
+  - VSCode
+    - terminal
+    - criar pasta do projeto
+    - dentro da pasta do projeto
+      - criar pasta server (mkdir server)
+        - será local do Back-end
+
+#### Configuração VSCode
+
+  - Extensões do VSCode importantes para o projeto
+
+    - ESLint
+      - automatiza e padroniza sintaxes do código
+      
+    - Fluente Icons
+      - altera os ícones do VSCode
+      
+    - GitLens (não obrigatória)
+      - otimiza versionamento Git/GitHub
+      
+    - Omni Theme da Rockeseat
+      - tema do VSCode
+      
+    - PostCSS
+      - integração entre projeto web e mobile
+      - junto com TailwindCSS
+      
+    - Prisma
+      - integração entre VSCode e banco de dados
+
+    - Symbols
+      - ícones minimalistas dos arquivos e pastas
+
+    - TailwindCSS
+      - facilita escrita do CSS
+
+
+  - Abrir configurações do VSCode (crtl shift P)
+    - settings
+      - disponíveis no GitHub do Diego
+      - copiar e colar no arquivo "settings"
+
+    - instalar fonte "JetBrains Mono"
+
+
+### Back-end
+
+  - abrir a pasta "server" no terminal do VSCode
+
+  Instalação Node.js / NPM
+    - Node - versão LTS (18.16.0)
+
+    - no terminal
+      - exibir versão para verificar se está instalado
+        node -v
+      - guia de instalação na plataforma do Ignite
+
+    - NPM - versão (9.5.1)
+      npm -v
+      - gerenciador de pacotes
+      - para instalação de bibliotecas de terceiros
+
+
+  Criar projeto JavaScript
+
+    - dentro da pasta "server"
+    - comando no terminal dentro da pasta "server"
+      npm init -y
+      
+    - irá criar o arquivo "package.json"
+    - todo projeto JS tem arquivo "package.json"
+      - informações principais do projeto
+        - name
+        - version
+        - description
+        - main
+        - scripts / test
+        - keywords
+        - author
+        - license
+      - lista com dependências do projeto
+        - todas as bibliotecas de terceiros
+
+
+  Instalar dependências
+  
+    TypeScript (5.0.4)
+      - adiciona tipagem estática ao JS
+        - ajuda a evitar certos problemas
+        - JS é tipos dinâmicos
+        - tipos estáticos
+          - variável ao ser declarada
+            - possui apenas um tipo
+            - não pode mudar de tipo
+        - tipos dinâmicos
+          - podem mudar de tipo ao longo do código
+            - de string para float...
+
+      - comando para instalar TypeScript
+        npm i typescript -D
+        - i = install
+        - -D = uso apenas em ambiente de desenvolvimento
+      - converte em JS ao fazer o deploy
+
+    Biblioteca Types/Node
+    - faz TypeScript entender que está em projeto Node
+      npm i @types/node -D
+
+    Biblioteca TSX
+    - automatiza o processo de conversão de TS para JS
+      npm i tsx -D
+
+    Comando npx
+      - executar binários das dependências
+
+      npx tsc --init
+      - cria arquivo "tsconfig.json"
+      - com as configurações do TS do projeto
+
+    Alterar configurações "tsconfig"
+      - "target" : "es2016",
+      - para "target" : "es2020",
+      - quer dizer que a conversão do código será
+      - para versão 2020 do JS (mais amigável com Node)
+
+
+  Criar primeiro arquivo do projeto (server.ts)
+
+    - arquivo terá o código do projeto
+
+    - criar pasta "src" dentro da pasta "server"
+      mkdir src
+      
+    - dentro da pasta "src"
+      cd src
+      
+    - criar arquivo "server.ts"
+      touch server.ts
+
+
+  Testando ambiente de desenvolvimento
+
+    Exibir mensagem no console
+      - no arquivo "server.ts"
+        console.log('oi');
+      - no terminal
+      - dentro da pasta "server"
+      - comando para exibir mensagem
+        npx tsx src/server.ts
+      - exbiu "oi" no terminal
+
+    Exibir mensagem no console rodando o "node" com sintaxe "TypeScript"
+      - no arquivo "server.ts"
+      - declarar variável do tipo String
+        const nome: string = 'Neto';
+        console.log(nome);
+
+      - no terminal rodar comando com node
+        node src/server.ts
+        - dará erro de sintaxe
+          - "node" não compreende sintaxe do TypeScript
+          - o "tsx" compreende e roda o comando sem problema
+            npx tsx src/server.ts
+
+
+  Criar atalho (alias) de comando do terminal
+
+    - no arquivo "server/package.json"
+    - dentro de "scripts"
+    - declarar o comando incluindo modo "watch"
+      - executa aplicação e não encerra após o comando
+      - fica em pausa aguardando o próximo comando
+      - ideal para processo de desenvolvimento
+      - faz reload sempre que salvar arquivo com código
+      "dev" : "tsx watch src/server.ts"
+        - não tem a necessidade do "npx" no comando
+        - npx é "global"
+
+    - para rodar o comando no terminal
+    - dentro da pasta server
+      npm run dev
+
+    - para encerrar aplicação
+      ctrl C
+
+
+  Instalar framework Fastify
+
+    - prática do mercado
+      - todo projeto em produção com Node e API Restfull
+      - utiliza um framework
+        - agiliza criação da aplicação
+        - otimiza segurança / performance
+        - oferece features necessárias
+
+    - abrir novo terminal
+      - dentro da pasta "server"
+      - comando para instalar a biblioteca "Fastify"
+        npm i fastify
+        - sem a flag -D (não será uma dependência de desenvolvimento)
+        - Fastify será utilizado nos ambientes
+          - desenvolvimento
+          - produção
+
+      - já aparece a dependência no arquivo "package.json"
+        - dependênica global
+
+
+  Importar e utilizar o framework na aplicação
+
+    - no arquivo "server.ts"
+
+    - declarar a importação
+      import fastify from 'fastify'
+
+    - declarar variável "app"
+    - que recebe "fastify()" com parâmetro vazio
+      const app = fastify();
+
+    - ao criar uma API
+      - precisa de servidor HTTP
+      - endereço onde front-end faz requisições
+      - servidor fica ouvindo as requisições
+      - interpreta e devolve resposta ao front-end
+
+
+    Método para servidor detectar requisições (listen)
+
+      app.listen({ ... });
+      - recebe como parâmentro um objeto com configurações
+        - sendo a porta do servidor a mais importante e obrigatória
+        - definir porta 3333 para ambiente de desenvolvimento
+          port: 3333,
+
+
+    Método para aguardar resposta
+
+      - método "listen" devolve uma promise
+      - resultado pode demorar para retornar
+      - para aguardar, concatenar o método "then"
+      - que permitirá detectar retorno da promise
+      - e executar uma ação
+      "assim que o servidor estiver no ar, então executar tal ação"
+      - a ação será uma função anônima
+      - que exibe no console uma mensagem
+
+        app.listen({
+          port: 3333,
+        }).then( () => {
+          console.log(̣̣̣̣̣'servidor rodando na porta 3333.');
+          console.log('http://localhost:3333');
+        });
+
+
+    Abrir servidor no navegador
+
+      - erro 404
+      - não foram criadas rotas na aplicação
+      - rotas são os endereços
+        - acessados pelo front-end
+        - para fazer as requisições
+
+        {
+          "message": "Route GET:/ not found",
+          "error": "Not Found",
+          "statusCode": 404
+        }
+
+
+    Criar rotas na aplicação
+
+      - rota "GET"
+        - método "GET" acessa URL
+        - quando endereço "hello" for acessado
+        - retorna mensagem "hello, world!"
+
+        app.get('/hello', () => {
+          return 'Hello, World!';
+        });
+
+      - verificar no navegador
+        - rodar o servidor
+        - inlcuir "/hello" no final da URL do servidor
+          http://localhost:3333/hello
+
+
+    Código final básico do Fastify com método "GET"
+
+      - importa framework
+      - guarda em uma variável
+      - determina rotas de requisição
+      - determina e detecta porta do servidor
+      - aguarda resposta
+      - realização ação
+
+        import fastify from 'fastify';
+        const app = fastify();
+        app.get('/hello', () => {
+          return 'Hello, World!'
+        });
+        app.listen({
+          port: 3333,
+        }).then ( () => {
+          console.log('servidor rodando na porta 3333');
+          console.log('http://localhost:3333');
+        });
+
+
+  Padrões da API Rest
+
+    - divir métodos http conforme semântica da rota
+
+    Métodos de requisição http
+
+      - os mais utilizados
+        - get (listar/ exibir)
+        - post (criar)
+        - put (autializar)
+        - patch (atualização específica de um recurso)
+        - delete (apagar)
+
+      - outros menos usados
+        - head
+        - opotion
+
+    Aplicações para testar rotas e requisições http
+
+      - postman api plataform (postman.com)
+      - insomnia (inspmnia.rest)
+      - hoppscotch open source api (hoppscotch.io) [mais visual]
+
+      - httpie.io (ferramenta para instalar no terminal)
+        - permite fazer requisições diretamente pelo terminal
+          http POST localhost:3333/hello
+          - tipo de requisição (http)
+          - tipo de método (POST)
+          - url do servidor (localhost:3333)
+          - a rota em questão (/hello)
+
+
+  Instalação do ESLint
+  
+    - permite ganho de produtividade
+    - padroniza sintaxe dos códigos do projeto
+      - uso de aspas
+      - ponto-e-vírgula
+      - identação
+      - quebra de linha
+
+    - instalar ferramenta pelo terminal
+    - dentro da pasta "server"
+      npm i eslint -D
+
+    Configuração do ESLint
+
+      - já vem com configuração padrão
+      - permite definir configuração própria
+
+      - opções de instalação via terminal
+          - se for instalar configuração padrão
+            npx eslint --init
+
+          - ou comando para instalar configuração da NLW
+            - não utiliza aspas duplas / ponto-e-vírgula
+            npm i @rocketseat/eslint-config -D
+
+
+      - criar arquivo de configuração na raiz do projeto (server)
+        server/.eslintrc.json
+
+      - configurar para uso do "eslint" em projeto "node" 
+        - escrever código no arquivo ".eslintrc.json"
+          
+          {
+            "extends": [
+              "@rocketseat/eslint-config/node"
+            ]
+          }
+          
+      - para os projetos com React / React-native
+      - alterar código:
+        "@rocketseat/eslint-config/react"
+
+    Extensão ESLint
+
+      - já está instalada
+      - já está exibindo aviso de "erro" de sintaxe
+
+      Ajustar configuração do VSCode 
+      
+        - que executa determinadas ações ao salvar (ctrl S)
+
+        - procurar e abrir o arquivo "settings.json"
+        - localizar a declaração "editor.codeActionsOnSave:"
+        - dentro dela tem a declaração "source.fixAll.eslint"
+        - valor desta declaração deve ser "true"
+        - assim sempre irá aplicar a padronização do ESLint ao salvar os arquivos do projeto
+
+      Ajustar configurações do projeto
+
+        - automatizar padronização para arquivos "Typescritp"
+        - criar atalho do comando
+        
+        - abrir arquivo "server/package.json"
+        - incluir em "scripts"
+          "lint": "eslint src --ext .ts --fix"
+
+        - verificar "erros" de padronização
+        - executar comando no terminal
+          npm run lint
+
+
+  Instalação do Prisma e SQLite
+
+  - SQLite
+    - banco de dados do tipo "file base"
+      - é apenas um arquivo dentro do projeto
+    - não requer instalação
+
+  - Prisma
+    - melhora performance / experiência de desenvolvimento
+    - ferramenta para trabalhar com banco de dados dentro do Node
+      - intercepta comunicação entre back-end com banco de dados
+      - cria forma unificada de acesso de informações do banco de dados
+      - com linguagem mais apropriada para desenvolvedores
+      - dispensando escritas manual de comandos SQL
+    - suporta diversos tipos de banco de dados
+      - o banco padrão é "PostgreSQL"
+    - permite mudar para outros bancos de dados ao entrar em produção
+      - sem nenhum tipo de alteração ao fazer a transição
+
+  Comando para instalar Prisma para desenvolvimento
+    - no terminal
+    - na pasta server
+      npm i prisma -D
+
+  Exibir comandos do Prisma
+    - exibir "help" do Prisma no terminal
+      npx prisma -h
+
+  Iniciar o Prisma
+    - lembrar de ter a extensão do Prisma instalada no VSCode
+      - para garantir funcionalidades da ferramenta
+
+    - comando no terminal
+    - com flag para indicar qual banco será utilizado no projeto
+      npx prisma init --datasource-provider SQLite
+
+    - criou a pasta "prisma" na raiz do projeto (server)
+    - contendo o arquivo de configurações "schema.prisma"
+
+    - criou também na raiz do projeto o arquivo ".env"
+    - configuração do local onde será salvo o banco de dados
+      DATABASE_URL="file:./dev.db"
+
+    - por padrão, salva na raiz do projeto (./) no arqvuio "dev.db"
+      - arquivo ".env" é padrão para projetos JS
+      - significa "variáveis ambiente"
+        - configurações que mudam em cada ambiente onde executa projeto
+          - computador local
+          - computadores da equipe de desenvolvimento
+          - servidor de produção
+    - para mudar local ou nome basta alterar esta variável
+
+  Definir tabelas do banco de dados do projeto
+
+    - no arquivo "schema.prisma"
+    - declarar "model" 
+      - termo genérico para "tabela"
+      - aceito por diversos tipos de banco de dados
+    - informar nome da tela "User"
+      - para informações do usuário (id, login, senha, ...)
+
+    - incluir o campo "id" do tipo String
+      - com indicação de chave-primária "@id"
+      - e geração de "id" único para cada usuário "@default(uuid)"
+
+    - incluir o campo "name" do tipo String
+      -
+
+    - configuração com formatação automática do arquivo ao salvar
+      - arquivo "settings.json"
+      - "[prisma]": { "editor.formatOnSave": true },
+      - alinha os tipos dos campos
+
+      model User {
+        id   String @id @default(uuid())
+        name String
+      }
+
+  Criar tabela no banco de dados
+    - comando do prisma no terminal dentro da pasta "server"
+    - irá ler o arquivo "schema.prsima"
+    - detecta as configurações/alterações feitas no arquivo
+      - inlcusão da tabela "User"
+      npx prisma migrate dev
+
+    - irá pedir no terminal para nomear nova "migration"
+      - que é o controle de versão do banco de dados
+      - cria histórico do banco de dados
+      - "migration" é semelhante ao "commit"
+      - pede para dar nome a última alteração realizada no banco de dados
+        - criar tabela de usuários
+
+    - criou dentro da pasta "prisma" a pasta "migration"
+      - onde ficará armazenado todo o histórico de alterações do banco
+      - ordenados por dia/hora de criação da migration
+
+    - criou também o próprio banco de dados (dev.db)
+      - dentro da pasta "server/prisma"
+
+  Visualizar o banco de dados
+
+    - ferramenta de visualização integrada ao Prisma (studio)
+    - exibe interface gráfica do banco de dados no navegador
+
+    - rodar no terminal
+      npx prisma studio
+
+  Criar usuário
+
+    - com o prisma-studio rodando
+    - na interface gráfica do banco de dados no navegador
+    - clicar em "user"
+      - não há nenhum usuário cadastrado
+    - clicar em "add record"
+      - campo "id" é gerado automaticamente
+      - digitar o nome do usuário no campo "name"
+      - clicar em "save 1 change"
+    - já resitrou primeiro usuário
+
+  Acessar banco de dados pelo servidor (API)
+
+    - encerrar o prisma-studio
+
+    Instalar cliente do prima
+      - com dependência de produção
+      - sem ser apenas em desenvolvimento (não tem o "-D")
+      npm i @prisma/client
+
+    Importar client na aplicação
+    
+      - no arquivo "server/src/server.ts"
+      - incorporar o cliente
+        const prisma = new PrismaClient()
+
+      - incluir rota da tabela do usuário
+      - com o método de requisição para trazer todos os usuários
+        - método "Many" sem nenhum parâmetro de filtro
+      - retornar "users"
+        app.get('/users', async () => {
+          const users = await prisma.user.findMany()
+          return users
+        })
+
+    Exibir rota no navegador
+
+    - no terminal
+      - comando com "alias" para rodar servidor
+        npm run dev
+
+    - no navegador
+      - indicar a URL do usuário
+      http://localhost:3333/users
+
+    - irá mostar os dados dos usuários cadastrados no banco de dados
+      [
+        {
+          "id": "a659d2e6-e684-4ed3-991a-8bb9d6f587a7",
+          "name": "Neto Paiva"
+        }
+      ]
+
+  Finalizada construção Back-end da aplicação
+
+    - realizadas todas as instalações e configurações iniciais
+
+
+timeline da aula: 49:18
+
+
+
+
